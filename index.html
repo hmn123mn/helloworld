@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		canvas{
+			background: #666;
+			display: block;
+			margin: 0px auto;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="cn1" width="800" height="800">
+	</canvas>
+
+	<script>
+	var ctx = cn1.getContext('2d');
+	function load_sun(){
+		ctx.beginPath();
+		ctx.arc(0,0,60,0,360*Math.PI/180);
+		ctx.fillStyle = 'red';
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc(0,0,160,0,360*Math.PI/180);
+		ctx.strokeStyle = '#fff';
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(160,0,36,0,360*Math.PI/180);
+		ctx.fillStyle = '#66f';
+		ctx.fill();
+
+	}
+
+	function load_moon(){
+		ctx.beginPath();
+		ctx.arc(0,0,60,0,360*Math.PI/180);
+		ctx.strokeStyle = '#fff';
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(60,0,16,0,360*Math.PI/180);
+		ctx.fillStyle = 'yellow';
+		ctx.fill();
+	}
+
+	function load_1(){
+		ctx.beginPath();
+		ctx.arc(0,0,260,0,360*Math.PI/180);
+		ctx.strokeStyle = '#fff';
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(260,0,38,0,360*Math.PI/180);
+		ctx.fillStyle = 'orange';
+		ctx.fill();
+	}
+
+	function load_2(){
+		ctx.beginPath();
+		ctx.arc(0,0,360,0,360*Math.PI/180);
+		ctx.strokeStyle = '#fff';
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(360,0,18,0,360*Math.PI/180);
+		ctx.fillStyle = 'pink';
+		ctx.fill();
+	}
+
+
+		var num_sum = 0;
+		var timer_sun = setInterval(function(){
+			num_sum += 6;
+			num_sum %= 360;
+			ctx.clearRect(0,0,800,800);
+			
+			ctx.save();
+			ctx.translate(cn1.width/2,cn1.width/2);	
+			ctx.rotate(2*num_sum*Math.PI/180);
+			load_sun();
+			ctx.restore();
+
+			ctx.save();
+			ctx.translate(cn1.width/2,cn1.width/2);	
+			ctx.rotate(num_sum*Math.PI/180);
+			load_1();
+			ctx.restore();
+
+			ctx.save();
+			ctx.translate(cn1.width/2,cn1.width/2);	
+			ctx.rotate(3*num_sum*Math.PI/180);
+			load_2();
+			ctx.restore();
+
+			ctx.save();
+			ctx.translate(cn1.width/2,cn1.width/2);	
+			ctx.rotate(2*num_sum*Math.PI/180);
+			ctx.translate(160,000);	
+			ctx.rotate(num_sum*Math.PI/180);
+			load_moon();
+			ctx.restore();
+		},66);
+	</script>
+</body>
+</html>
